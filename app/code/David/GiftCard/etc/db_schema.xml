@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="gift_card" resource="default" engine="innodb" comment="Gift Card Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="int" name="assigned_customer_id" padding="10" unsigned="true" nullable="true"
+                comment="Customer ID"/>
+        <column xsi:type="varchar" name="code" length="255" nullable="false" comment="Gift Card code"/>
+        <column xsi:type="int" name="status" unsigned="true" nullable="false" comment="Status"/>
+        <column xsi:type="decimal" name="initial_value" scale="6" precision="20" unsigned="false" nullable="false"
+                comment="Initial Value"/>
+        <column xsi:type="decimal" name="current_value" scale="6" precision="20" unsigned="false" nullable="false"
+                comment="Current Value"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Create date"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <column xsi:type="varchar" name="recipient_email" length="255" nullable="true" comment="Recipient Email"/>
+        <column xsi:type="varchar" name="recipient_name" length="255" nullable="true" comment="Recipient Name"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="GIFT_CARD_ASSIGNED_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="gift_card" column="assigned_customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="gift_card_usage" resource="default" engine="innodb" comment="Gift Card Usage Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="int" name="gift_card_id" padding="10" unsigned="true" nullable="true"
+                comment="Gift Card ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" comment="Order ID"/>
+        <column xsi:type="decimal" name="value_change" scale="6" precision="20" unsigned="false" nullable="false"
+                comment="Value Change"/>
+        <column xsi:type="datetime" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="text" name="notes" nullable="false" comment="Notes"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="GIFT_CARD_USAGE_GIFT_CARD_ID_GIFT_CARD_ID"
+                    table="gift_card_usage" column="gift_card_id" referenceTable="gift_card"
+                    referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="GIFT_CARD_USAGE_GIFT_CARD_ID_SALES_ORDER_ENTITY_ID"
+                    table="gift_card_usage" column="order_id" referenceTable="sales_order"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+</schema>
