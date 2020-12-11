@@ -4,4 +4,5 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="David\GiftCard\Api\Data\GiftCardInterface" type="David\GiftCard\Model\GiftCard"/>
     <preference for="David\GiftCard\Api\Data\GiftCardUsageInterface" type="David\GiftCard\Model\GiftCardUsage"/>
+    <preference for="David\GiftCard\Api\Data\GiftCardSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 </config>
