@@ -4,5 +4,13 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="David\GiftCard\Api\Data\GiftCardInterface" type="David\GiftCard\Model\GiftCard"/>
     <preference for="David\GiftCard\Api\Data\GiftCardUsageInterface" type="David\GiftCard\Model\GiftCardUsage"/>
-    <preference for="David\GiftCard\Api\Data\GiftCardSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="David\GiftCard\Api\Data\GiftCardSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+
+    <virtualType name="David\GiftCard\Model\ResourceModel\Product\Indexer\Price\VirtualProductPrice"
+                 type="Magento\Catalog\Model\ResourceModel\Product\Indexer\Price\SimpleProductPrice">
+        <arguments>
+            <argument name="productType" xsi:type="string">David\GiftCard\Model\Type\GiftCard::TYPE_CODE</argument>
+        </arguments>
+    </virtualType>
 </config>
