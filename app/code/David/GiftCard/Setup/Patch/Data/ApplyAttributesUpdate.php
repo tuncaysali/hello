@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace David\GiftCard\Setup\Patch\Data;
 
@@ -31,7 +32,7 @@ class ApplyAttributesUpdate implements DataPatchInterface, PatchVersionInterface
      */
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
-        \Magento\Eav\Setup\EavSetupFactory $eavSetupFactory
+        EavSetupFactory $eavSetupFactory
     ) {
         $this->moduleDataSetup = $moduleDataSetup;
         $this->eavSetupFactory = $eavSetupFactory;
